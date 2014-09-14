@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+	<form class="form-signin" role="form"  method="post" enctype="multipart/form-data">
+        
+        <label>Capture/Upload Image 1/ Entrance [Mobile]</label>
+        <input class="form-control" type="file" name="image1" accept="image/*" required>     
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form>
+{% endblock %}

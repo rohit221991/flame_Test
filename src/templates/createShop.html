@@ -1,0 +1,50 @@
+{% extends "navbar_fixed_base.html" %}
+{% block css %}
+	<link rel="stylesheet" href="../assets/css/form.css">
+{% endblock %}
+
+{% block content %}
+	<form class="form-signin" role="form"  method="post" enctype="multipart/form-data">
+        <h2 class="form-signin-heading">Enter Shop Details</h2>
+        <input type="hidden" name="mall_id" value="{% if mall %} {{mall.key().id()}} {% endif %}">
+        <label>City</label>
+        <h4 class="form-control">{{mall.city}}</h4>
+        
+        <label>Mall Name</label>
+        <h4 class="form-control">{{mall.name}}</h4>
+        
+        <label>Shop Name</label>
+        <input name="shop_name" class="form-control" type="text" required autofocus> 
+        
+        <label>Floor</label>
+        <select class="form-control" name="shop_floor" value="{% if mall != null%} {{mall.floor}} {% else %} 0 {% endif %}">
+        	{% for i in range(-2, 7) %}
+        		<option {% if i == mall.lowest_floor %} selected {% endif %}> {{i}}</option>
+        	{% endfor %}
+        </select>
+        
+        <label>Capture/Upload Image 1/ Mall Outside</label>
+        <input class="form-control" type="file" name="image1" accept="image/*" >    
+        
+        <div {% if not image1 %} style="display:None" {% endif %}>
+	        <label>Preview</label>
+	        <img class="form-control" src="{{image1}}" /> 
+        </div>
+        
+        <!-- <label>Capture/Upload Image 2/ Mall Inside</label>
+        <input class="form-control" type="file" name="image2" accept="image/*" >     
+        
+        <label>Capture/Upload Image 3 Misc 1</label>
+        <input class="form-control" type="file" name="image3" accept="image/*" >     
+        
+        <label>Capture/Upload Image 4 Misc 2</label>
+        <input class="form-control" type="file" name="image4" accept="image/*" >  -->    
+        
+        <label>Comment</label>
+        <textarea class="form-control" name="comment">{{mall.comment}}</textarea>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form>
+      <p>{{mall}}</p>
+      
+{% endblock %}

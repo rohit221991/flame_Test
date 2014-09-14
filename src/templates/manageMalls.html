@@ -1,0 +1,27 @@
+{% extends "navbar_fixed_base.html" %}
+
+{% block content %}
+	<table class="table">
+		<thead>
+			
+		</thead>
+		<tbody>
+			{% for mall in malls %}
+			<tr>
+				<td style="vertical-align: middle;"><h4>{{mall.name}}</h4></td>
+				<td><a class="btn btn-primary" href="/createMall?mall_id={{mall.key().id()}}" role="button">Edit Details</a></td>
+				<td><a class="btn btn-primary" href="createShop/?mall_id={{mall.key().id()}}" role="button">Add Shop</a></td>
+				<td><a class="btn btn-info" href="/manageMalls/?mall_id={{mall.key().id()}}" role="button">Manage Shops</a></td>
+				
+				<td>
+					<form action="/createMall?mall_id={{mall.key().id()}}" method="post">
+						<input type="hidden" name="_method" value="delete" />
+						<button class="btn btn-danger">Delete Mall</buttton>
+					</form>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+{% endblock %}

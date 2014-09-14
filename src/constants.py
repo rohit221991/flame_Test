@@ -1,0 +1,2 @@
+cities = ["Bangalore", "Delhi", "Mumbai", "Pune", "Chennai", "Kolkata"]
+categories = ["Food", "Electronics", "Cloth", "Footwear", "Entertainment", "Jewellery", "Accessory", "Sports", "Gift", "Books", "Others"]

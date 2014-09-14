@@ -1,0 +1,65 @@
+{% extends "navbar_fixed_base.html" %}
+{% block css %}
+	<link rel="stylesheet" href="../assets/css/form.css">
+{% endblock %}
+{% block content %}
+	<form class="form-signin" role="form"  method="post" enctype="multipart/form-data">
+        <h2 class="form-signin-heading">Enter Mall Details</h2>
+        <input type="hidden" name="mall_id" value="{% if mall %} {{mall.key().id()}} {% endif %}">
+        <label>City</label>
+        <select class="form-control" name="city_name">
+        	{% for city in cities %}
+                <option {% if mall and city == mall.city %} selected {% endif %}>{{city}}</option>
+            {% endfor %}
+        </select>
+        <label>Mall Name</label>
+        <input class="form-control" placeholder="InOrbit Mall" name="mall_name" value="{{mall.name}}" required autofocus>
+        
+        <label>Lowest Floor</label>
+        <select class="form-control" name="lowest_floor" value="{% if mall != null%} {{mall.lowest_floor}} {% else %} -1 {% endif %}">
+        	{% for i in range(-2, 1) %}
+        		<option {% if i == mall.lowest_floor %} selected {% endif %}> {{i}}</option>
+        	{% endfor %}
+        </select>
+        
+        <label>Highest Floor</label>
+        <select class="form-control" name="highest_floor" value="{% if mall != null%} {{mall.highest_floor}} {% else %} 3 {% endif %}">
+        	{% for i in range(1, 7) %}
+        		<option {% if i == mall.highest_floor %} selected {% endif %}> {{i}}</option>
+        	{% endfor %}
+        </select>
+        
+        <label>Latitude</label>
+        <input id="latitude" name="latitude" class="form-control" type="text" placeholder="12.12" value="{% if mall.location %}{{mall['location'].lat}} {% endif %}" required>
+        
+        <label>Longitude</label>
+        <input id="longitude" name="longitude" class="form-control" type="text" placeholder="12.12" value="{% if mall.location %}{{mall['location'].lon}} {% endif %}">
+        
+        <label>Capture/Upload Image 1/ Mall Outside</label>
+        <input class="form-control" type="file" name="image1" accept="image/*" >    
+        
+        <div {% if not mall.image1 %} style="display:None" {% endif %}>
+	        <label>Preview</label>
+	        <img class="form-control" src="{{mall.image1}}" /> 
+        </div>
+        
+        <!-- <label>Capture/Upload Image 2/ Mall Inside</label>
+        <input class="form-control" type="file" name="image2" accept="image/*" >     
+        
+        <label>Capture/Upload Image 3 Misc 1</label>
+        <input class="form-control" type="file" name="image3" accept="image/*" >     
+        
+        <label>Capture/Upload Image 4 Misc 2</label>
+        <input class="form-control" type="file" name="image4" accept="image/*" >  -->    
+        
+        <label>Address</label>
+        <input type="text" class="form-control" name="address" placeholder="Near MG Road" value="{{mall.address}}" required>
+        
+        <label>Comment</label>
+        <textarea class="form-control" name="comment">{{mall.comment}}</textarea>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form>
+      <p></p>
+      
+{% endblock %}
